@@ -36,7 +36,7 @@ BlockChain.prototype.createNewTransaction = function(amount,sender,recipient){
 }
 
 BlockChain.prototype.hashBlock = function(previousBlockHash,currentBlockData,nonce){
-    const dataAsString = previousBlockHash + nonce.toString() - JSON.stringify(currentBlockData);
+    const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
     const hash = sha256(dataAsString);
     return hash;
 }
