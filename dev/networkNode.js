@@ -3,6 +3,7 @@ const app = express();
 const { v4: uuidv4 } = require('uuid');
 const nodeAddress = uuidv4().split('-').join('');
 const port = process.argv[2];
+const rp = require('request-promise');
 var bodyParser = require('body-parser');
 const blockchain = require('./Blockchain');
 
