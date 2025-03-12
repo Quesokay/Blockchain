@@ -70,10 +70,11 @@ app.get('/mine', (req, res) => {
       json: true
     };
     return rp(requestOptions);
-  });
-  res.json({
-    note:"New block mined successfully",
-    block:newBlock
+  }).then(data => {
+    res.json({
+      note: "New block mined & broadcast successfully",
+      block: newBlock
+    });
   });
 });
 
