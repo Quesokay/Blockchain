@@ -83,8 +83,9 @@ app.post('/register-nodes-bulk', (req, res) => {
     if(nodeNotAlreadyPresent && notCurrentNode) bitcoin.networkNodes.push(networkNodeUrl);
   });
   res.json({note:'Bulk registration successful.'});
-
 });
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
