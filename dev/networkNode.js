@@ -78,6 +78,27 @@ app.get('/mine', (req, res) => {
   });
 });
 
+//receive-new-block
+app.post('/receive-new-block', (req, res) => {
+  const newBlock = req.body.newBlock;
+  const lastBlock = bitcoin.getLastBlock();
+  const correctHash = lastBlock.hash === newBlock.previousBlockHash;
+  const correctIndex = lastBlock['index'] + 1 === newBlock['index'];
+  if(correctHash && correctIndex){
+    bitcoin.chain.push(newBlock);
+    bitcoin.pendingTransactions = [];
+    res.json({
+      note: 'New block received and accepted.',
+      newBlock: newBlock
+    });
+  } else {
+    res.json({
+      note: 'New block rejected.',
+      newBlock: newBlock
+    });
+  }
+});
+
 //create genesis block
 app.get('/blockchain', (req, res) => {
   res.send(bitcoin);
